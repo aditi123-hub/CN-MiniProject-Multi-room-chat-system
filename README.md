@@ -145,7 +145,7 @@ In each client terminal, register with a username:
 
 **Example:**
 ```bash
-/register aditi
+/register John
 ```
 
 ## 4. Join a Chat Room
