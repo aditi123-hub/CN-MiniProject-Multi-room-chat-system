@@ -122,54 +122,68 @@ The system uses a custom JSON-based protocol for communication and ensures messa
 
 ---
 
-## 🖥️ How to Run
+# 🖥️ How to Run
 
-### 1. Start Server
+## 1. Start Server
 ```bash
 python server.py
-2. Start Client(s)
+```
+
+## 2. Start Client(s)
 
 Open a new terminal (you can open multiple terminals for multiple users):
-
+```bash
 python client.py
-3. Register Users
+```
+
+## 3. Register Users
 
 In each client terminal, register with a username:
+```bash
+/register <username>
+```
 
-/register username
-
-Example:
-
+**Example:**
+```bash
 /register aditi
-4. Join a Chat Room
+```
+
+## 4. Join a Chat Room
+```bash
 /join room1
+```
 
-All users must join the same room to communicate.
+> All users must join the same room to communicate.
 
-5. Send Messages
+## 5. Send Messages
+```bash
 /msg hello everyone
+```
 
-Messages will be visible to all users in the same room.
+> Messages will be visible to all users in the same room.
 
-6. Send Private Messages
-/pm username message
+## 6. Send Private Messages
+```bash
+/pm <username> <message>
+```
 
-Example:
-
+**Example:**
+```bash
 /pm user2 hi
+```
 
-Only the specified user will receive this message.
+> Only the specified user will receive this message.
 
-7. Send Files
+## 7. Send Files
 
 Make sure the file exists in your project folder.
+```bash
+/file <username> <filename>
+```
 
-/file username filename
-
-Example:
-
+**Example:**
+```bash
 /file user2 test.txt
+```
 
-The receiving user will get the file saved as:
-
-received_test.txt
+> The receiving user will get the file saved as: `received_test.txt`
