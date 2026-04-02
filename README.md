@@ -73,7 +73,7 @@ Before running the server, generate SSL certificates:
 
 ```bash
 openssl req -new -x509 -days 365 -nodes -out cert.pem -keyout key.pem -subj "/CN=localhost"
-
+```
 
 # 🖥️ How to Run
 
