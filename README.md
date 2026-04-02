@@ -2,71 +2,9 @@
 
 ## 📌 Project Overview
 
-This project implements a scalable **client-server chat application** using TCP sockets in Python. It supports multiple concurrent clients, allowing users to communicate in chat rooms, send private messages, and transfer files.
+This project implements a scalable **client-server chat application** using low-level TCP sockets in Python. It supports multiple concurrent clients, enabling users to communicate in chat rooms, send private messages, and transfer files securely.
 
-The system uses a custom JSON-based protocol for communication and ensures message ordering within each room using synchronization mechanisms.
-
----
-
-## 🚀 Features
-
-- 👥 Multi-client support using TCP sockets  
-- 🏠 Multiple chat rooms  
-- 💬 Real-time messaging within rooms  
-- 🔒 Private messaging between users  
-- 📁 File transfer using Base64 encoding  
-- ⚙️ Custom JSON-based protocol  
-- 🧵 Multithreading for concurrency  
-- 🔁 Ordered message delivery using locks  
-- ❌ Graceful handling of client disconnections  
-
----
-
-## 🧠 System Architecture
-
-- **Server**:
-  - Handles client connections
-  - Manages chat rooms and users
-  - Routes messages between clients
-
-- **Client**:
-  - Connects to server
-  - Sends commands and messages
-  - Receives messages and files
-
----
-
-## ⚙️ Technologies Used
-
-- Language: Python  
-- Communication: TCP Sockets  
-- Concurrency: Threading  
-- Data Format: JSON  
-- File Encoding: Base64  
-
----
-
-## 🔄 Working Principle
-
-1. Server listens for incoming connections  
-2. Each client is handled using a separate thread  
-3. Clients register and join chat rooms  
-4. Messages are sent using JSON format  
-5. Server processes:
-   - Room messages → broadcast to room users  
-   - Private messages → sent to specific user  
-   - Files → encoded and transferred  
-6. Locks ensure ordered delivery of messages  
-
----
-
-# 💬 Multi-Room Secure Chat System with File Transfer
-
-## 📌 Project Overview
-
-This project implements a scalable **client-server chat application** using TCP sockets in Python. It supports multiple concurrent clients, allowing users to communicate in chat rooms, send private messages, and transfer files.
-
-The system uses a custom JSON-based protocol for communication and ensures message ordering within each room using synchronization mechanisms.
+The system uses a custom **JSON-based communication protocol** and ensures **ordered message delivery** using synchronization mechanisms. Secure communication is achieved using **SSL/TLS encryption**.
 
 ---
 
@@ -77,6 +15,7 @@ The system uses a custom JSON-based protocol for communication and ensures messa
 - 💬 Real-time messaging within rooms  
 - 🔒 Private messaging between users  
 - 📁 File transfer using Base64 encoding  
+- 🔐 Secure communication using SSL/TLS  
 - ⚙️ Custom JSON-based protocol  
 - 🧵 Multithreading for concurrency  
 - 🔁 Ordered message delivery using locks  
@@ -86,41 +25,55 @@ The system uses a custom JSON-based protocol for communication and ensures messa
 
 ## 🧠 System Architecture
 
-- **Server**:
-  - Handles client connections
-  - Manages chat rooms and users
-  - Routes messages between clients
+### 🔹 Server
+- Handles incoming client connections  
+- Manages users and chat rooms  
+- Routes messages (room / private / file transfer)  
+- Ensures thread-safe operations using locks  
+- Secures communication using SSL  
 
-- **Client**:
-  - Connects to server
-  - Sends commands and messages
-  - Receives messages and files
+### 🔹 Client
+- Connects securely to server  
+- Sends commands and messages  
+- Receives messages and files  
+- Supports multiple operations via CLI commands  
 
 ---
 
 ## ⚙️ Technologies Used
 
-- Language: Python  
-- Communication: TCP Sockets  
-- Concurrency: Threading  
-- Data Format: JSON  
-- File Encoding: Base64  
+- **Language:** Python  
+- **Communication:** TCP Sockets  
+- **Security:** SSL/TLS  
+- **Concurrency:** Threading  
+- **Data Format:** JSON  
+- **File Encoding:** Base64  
 
 ---
 
 ## 🔄 Working Principle
 
-1. Server listens for incoming connections  
-2. Each client is handled using a separate thread  
-3. Clients register and join chat rooms  
-4. Messages are sent using JSON format  
-5. Server processes:
+1. Server starts and listens for incoming connections  
+2. Each client connection is handled in a separate thread  
+3. Clients register with a username  
+4. Clients join chat rooms  
+5. Messages are sent using JSON format  
+6. Server processes:
    - Room messages → broadcast to room users  
    - Private messages → sent to specific user  
    - Files → encoded and transferred  
-6. Locks ensure ordered delivery of messages  
+7. Locks ensure ordered and thread-safe message delivery  
+8. SSL/TLS ensures encrypted communication   
 
 ---
+
+## 🔐 SSL Certificate Setup (IMPORTANT)
+
+Before running the server, generate SSL certificates:
+
+```bash
+openssl req -new -x509 -days 365 -nodes -out cert.pem -keyout key.pem -subj "/CN=localhost"
+
 
 # 🖥️ How to Run
 
