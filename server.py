@@ -116,3 +116,29 @@ def handle_client(conn, addr):
             remove_user(username)
         conn.close()
         print(f"[DISCONNECTED] {addr}")
+
+
+def start_server():
+    context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+    context.load_cert_chain("cert.pem", "key.pem")
+
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.bind((HOST, PORT))
+    server.listen()
+
+    print(f"🔐 Server running on {HOST}:{PORT}")
+
+    while True:
+        conn, addr = server.accept()
+        try:
+            secure_conn = context.wrap_socket(conn, server_side=True)
+            threading.Thread(
+                target=handle_client,
+                args=(secure_conn, addr),
+                daemon=True
+            ).start()
+        except ssl.SSLError:
+            conn.close()
+
+if __name__ == "__main__":
+    start_server()
